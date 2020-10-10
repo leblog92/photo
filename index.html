@@ -1,3 +1,19 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <title>
+    Photoshoot
+  </title>
+  <style>
+    body{
+      background-color:#333;
+    }
+    #name{
+      background-color:#eee;
+    }
+  </style>
+</head>
+<body>
 <video id="player" controls autoplay></video><br><br>
 <a href="#" id="downloader" download="image.png"><button id="capture" style="width:100px;height:50px">CAPTURE</button></a>&nbsp;
 <input id="name" value="photo" style="width:100px;height:50px">
@@ -32,3 +48,5 @@ context.drawImage(player,0,0,snapshotCanvas.width,snapshotCanvas.height);
 navigator.mediaDevices.getUserMedia({video:true})
 .then(handleSuccess);
 </script>
+</body>
+</html>
