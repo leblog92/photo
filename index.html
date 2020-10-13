@@ -1,30 +1,34 @@
 <!doctype html>
 <html lang="fr">
 <head>
-  <title>
-    Photoshoot
-  </title>
-  <style>
-    body{
-      background-color:#333;
-    }
-    #name{
-      background-color:#eee;
-    }
-  </style>
+<title>
+Photoshoot
+</title>
+<style>
+body{
+background-color:#333;
+overflow:hidden;
+}
+#name{
+background-color:#eee;
+}
+</style>
 </head>
 <body>
-<video id="player" controls autoplay></video><br><br>
+<video id="player" controls autoplay></video>&nbsp;<canvas id="snapshot" width=640 height=480></canvas><br><br>
 <a href="#" id="downloader" download="image.png"><button id="capture" style="width:100px;height:50px">CAPTURE</button></a>&nbsp;
-<input id="name" value="photo" style="width:100px;height:50px">
-<br><br>
-<canvas id="snapshot" width=640 height=480></canvas><br>
+<input id="name" value="" style="width:100px;height:50px">
+
 <script>
 var player=document.getElementById('player'); 
 var snapshotCanvas=document.getElementById('snapshot');
 var captureButton=document.getElementById('capture');
 var download=document.getElementById('downloader');
 var videoTracks;
+var na=document.getElementById("name");
+var nu=0;
+
+na.value="PHOTO_"+nu;
 
 var handleSuccess=function(stream){
 //Attach the video stream to the video element and autoplay.
@@ -33,8 +37,10 @@ videoTracks=stream.getVideoTracks();
 };
 
 download.addEventListener('click',function(){
-document.getElementById("downloader").download=document.getElementById("name").value + ".png";
+document.getElementById("downloader").download=document.getElementById("name").value+".png";
 document.getElementById("downloader").href=document.getElementById("snapshot").toDataURL("image/png").replace(/^data:image\/[^;]/,'data:application/octet-stream');
+nu++;
+na.value="PHOTO_"+nu;
 });
 
 captureButton.addEventListener('click',function(){
@@ -47,6 +53,7 @@ context.drawImage(player,0,0,snapshotCanvas.width,snapshotCanvas.height);
 
 navigator.mediaDevices.getUserMedia({video:true})
 .then(handleSuccess);
+
 </script>
 </body>
 </html>
